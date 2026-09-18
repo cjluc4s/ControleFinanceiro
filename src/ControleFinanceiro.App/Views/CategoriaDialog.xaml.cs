@@ -4,7 +4,7 @@ using ControleFinanceiro.Data.Models;
 
 namespace ControleFinanceiro.App.Views;
 
-public partial class CategoriaDialog : Window
+public partial class CategoriaDialog : Wpf.Ui.Controls.FluentWindow
 {
     private readonly CategoriaEditViewModel _viewModel;
 

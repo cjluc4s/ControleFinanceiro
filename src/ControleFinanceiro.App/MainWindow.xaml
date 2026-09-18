@@ -1,69 +1,90 @@
-<Window x:Class="ControleFinanceiro.App.MainWindow"
+<ui:FluentWindow x:Class="ControleFinanceiro.App.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Title="Controle Financeiro" Height="600" Width="1080"
-        MinHeight="480" MinWidth="820">
-    <Grid Margin="16">
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        Title="Controle Financeiro" Height="640" Width="1080"
+        MinHeight="520" MinWidth="820"
+        ExtendsContentIntoTitleBar="True"
+        WindowBackdropType="Mica">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,16">
-            <Border Background="#E8F5E9" CornerRadius="6" Padding="12,8" Margin="0,0,12,0">
-                <StackPanel>
-                    <TextBlock Text="Receitas" FontSize="12" Foreground="#2E7D32"/>
-                    <TextBlock Text="{Binding TotalReceitas, StringFormat={}{0:C2}}" FontSize="18" FontWeight="Bold" Foreground="#2E7D32"/>
-                </StackPanel>
-            </Border>
-            <Border Background="#FFEBEE" CornerRadius="6" Padding="12,8" Margin="0,0,12,0">
-                <StackPanel>
-                    <TextBlock Text="Despesas" FontSize="12" Foreground="#C62828"/>
-                    <TextBlock Text="{Binding TotalDespesas, StringFormat={}{0:C2}}" FontSize="18" FontWeight="Bold" Foreground="#C62828"/>
-                </StackPanel>
-            </Border>
-            <Border Background="#E3F2FD" CornerRadius="6" Padding="12,8" Margin="0,0,12,0">
-                <StackPanel>
-                    <TextBlock Text="Saldo do período" FontSize="12" Foreground="#1565C0"/>
-                    <TextBlock Text="{Binding Saldo, StringFormat={}{0:C2}}" FontSize="18" FontWeight="Bold" Foreground="#1565C0"/>
-                </StackPanel>
-            </Border>
-            <Border Background="#EDE7F6" CornerRadius="6" Padding="12,8">
-                <StackPanel>
-                    <TextBlock Text="Patrimônio Total" FontSize="12" Foreground="#4527A0"/>
-                    <TextBlock Text="{Binding PatrimonioTotal, StringFormat={}{0:C2}}" FontSize="18" FontWeight="Bold" Foreground="#4527A0"/>
-                </StackPanel>
-            </Border>
-        </StackPanel>
+        <ui:TitleBar Grid.Row="0" Title="Controle Financeiro"/>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,12">
-            <Button Content="Adicionar" Width="100" Margin="0,0,8,0" Command="{Binding AdicionarCommand}"/>
-            <Button Content="Editar" Width="100" Margin="0,0,8,0" Command="{Binding EditarCommand}"/>
-            <Button Content="Excluir" Width="100" Margin="0,0,24,0" Command="{Binding ExcluirCommand}"/>
+        <Grid Grid.Row="1" Margin="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <ComboBox Width="140" Margin="0,0,8,0"
-                      ItemsSource="{Binding MesesDisponiveis}" SelectedItem="{Binding MesSelecionado}"/>
-            <ComboBox Width="120" Margin="0,0,24,0"
-                      ItemsSource="{Binding AnosDisponiveis}" SelectedItem="{Binding AnoSelecionado}"/>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,16">
+                <ui:Card Margin="0,0,12,0" Padding="12,8">
+                    <StackPanel>
+                        <TextBlock Text="Receitas" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                        <TextBlock Text="{Binding TotalReceitas, StringFormat={}{0:C2}}" FontSize="18" FontWeight="Bold" Foreground="#4CAF50"/>
+                    </StackPanel>
+                </ui:Card>
+                <ui:Card Margin="0,0,12,0" Padding="12,8">
+                    <StackPanel>
+                        <TextBlock Text="Despesas" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                        <TextBlock Text="{Binding TotalDespesas, StringFormat={}{0:C2}}" FontSize="18" FontWeight="Bold" Foreground="#EF5350"/>
+                    </StackPanel>
+                </ui:Card>
+                <ui:Card Margin="0,0,12,0" Padding="12,8">
+                    <StackPanel>
+                        <TextBlock Text="Saldo do período" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                        <TextBlock Text="{Binding Saldo, StringFormat={}{0:C2}}" FontSize="18" FontWeight="Bold" Foreground="#42A5F5"/>
+                    </StackPanel>
+                </ui:Card>
+                <ui:Card Padding="12,8">
+                    <StackPanel>
+                        <TextBlock Text="Patrimônio Total" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                        <TextBlock Text="{Binding PatrimonioTotal, StringFormat={}{0:C2}}" FontSize="18" FontWeight="Bold" Foreground="#AB47BC"/>
+                    </StackPanel>
+                </ui:Card>
+            </StackPanel>
 
-            <Button Content="Categorias" Width="100" Margin="0,0,8,0" Command="{Binding GerenciarCategoriasCommand}"/>
-            <Button Content="Contas" Width="100" Command="{Binding GerenciarContasCommand}"/>
-        </StackPanel>
+            <Grid Grid.Row="1" Margin="0,0,0,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
-        <DataGrid Grid.Row="2" ItemsSource="{Binding Transacoes}" SelectedItem="{Binding TransacaoSelecionada}"
-                  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
-                  CanUserAddRows="False" GridLinesVisibility="Horizontal">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Data" Binding="{Binding Data, StringFormat=dd/MM/yyyy}" Width="100"/>
-                <DataGridTextColumn Header="Descrição" Binding="{Binding Descricao}" Width="*"/>
-                <DataGridTextColumn Header="Categoria" Binding="{Binding Categoria.Nome}" Width="140"/>
-                <DataGridTextColumn Header="Conta" Binding="{Binding Conta.Nome}" Width="120"/>
-                <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" Width="90"/>
-                <DataGridTextColumn Header="Valor" Binding="{Binding Valor, StringFormat={}{0:C2}}" Width="120"/>
-            </DataGrid.Columns>
-        </DataGrid>
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <ui:Button Content="Adicionar" Appearance="Primary" Width="100" Margin="0,0,8,0" Command="{Binding AdicionarCommand}"/>
+                    <Button Content="Editar" Width="100" Margin="0,0,8,0" Command="{Binding EditarCommand}"/>
+                    <Button Content="Excluir" Width="100" Margin="0,0,24,0" Command="{Binding ExcluirCommand}"/>
+
+                    <ComboBox Width="140" Margin="0,0,8,0"
+                              ItemsSource="{Binding MesesDisponiveis}" SelectedItem="{Binding MesSelecionado}"/>
+                    <ComboBox Width="120" Margin="0,0,24,0"
+                              ItemsSource="{Binding AnosDisponiveis}" SelectedItem="{Binding AnoSelecionado}"/>
+
+                    <Button Content="Categorias" Width="100" Margin="0,0,8,0" Command="{Binding GerenciarCategoriasCommand}"/>
+                    <Button Content="Contas" Width="100" Command="{Binding GerenciarContasCommand}"/>
+                </StackPanel>
+
+                <ui:Button Grid.Column="1" Icon="{ui:SymbolIcon WeatherSunny24}" Command="{Binding AlternarTemaCommand}"/>
+            </Grid>
+
+            <DataGrid Grid.Row="2" ItemsSource="{Binding Transacoes}" SelectedItem="{Binding TransacaoSelecionada}"
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
+                      CanUserAddRows="False" GridLinesVisibility="Horizontal">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Data" Binding="{Binding Data, StringFormat=dd/MM/yyyy}" Width="100"/>
+                    <DataGridTextColumn Header="Descrição" Binding="{Binding Descricao}" Width="*"/>
+                    <DataGridTextColumn Header="Categoria" Binding="{Binding Categoria.Nome}" Width="140"/>
+                    <DataGridTextColumn Header="Conta" Binding="{Binding Conta.Nome}" Width="120"/>
+                    <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" Width="90"/>
+                    <DataGridTextColumn Header="Valor" Binding="{Binding Valor, StringFormat={}{0:C2}}" Width="120"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
-</Window>
+</ui:FluentWindow>

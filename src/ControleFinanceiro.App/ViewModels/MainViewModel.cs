@@ -6,6 +6,7 @@ using ControleFinanceiro.App.Services;
 using ControleFinanceiro.App.Views;
 using ControleFinanceiro.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Wpf.Ui.Appearance;
 
 namespace ControleFinanceiro.App.ViewModels;
 
@@ -204,6 +205,16 @@ public partial class MainViewModel : ObservableObject
             await context.SaveChangesAsync();
             await CarregarAsync();
         }
+    }
+
+    [RelayCommand]
+    private void AlternarTema()
+    {
+        var novoTema = ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Dark
+            ? ApplicationTheme.Light
+            : ApplicationTheme.Dark;
+
+        ApplicationThemeManager.Apply(novoTema);
     }
 
     [RelayCommand]

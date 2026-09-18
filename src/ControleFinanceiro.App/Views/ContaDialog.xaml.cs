@@ -5,7 +5,7 @@ using ControleFinanceiro.Data.Models;
 
 namespace ControleFinanceiro.App.Views;
 
-public partial class ContaDialog : Window
+public partial class ContaDialog : Wpf.Ui.Controls.FluentWindow
 {
     private readonly ContaEditViewModel _viewModel;
 

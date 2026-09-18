@@ -3,7 +3,7 @@ using ControleFinanceiro.App.ViewModels;
 
 namespace ControleFinanceiro.App.Views;
 
-public partial class CategoriasWindow : Window
+public partial class CategoriasWindow : Wpf.Ui.Controls.FluentWindow
 {
     public CategoriasViewModel ViewModel { get; }
 

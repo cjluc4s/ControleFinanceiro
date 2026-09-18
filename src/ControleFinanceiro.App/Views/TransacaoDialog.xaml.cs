@@ -5,7 +5,7 @@ using ControleFinanceiro.Data.Models;
 
 namespace ControleFinanceiro.App.Views;
 
-public partial class TransacaoDialog : Window
+public partial class TransacaoDialog : Wpf.Ui.Controls.FluentWindow
 {
     private readonly TransacaoEditViewModel _viewModel;
 
