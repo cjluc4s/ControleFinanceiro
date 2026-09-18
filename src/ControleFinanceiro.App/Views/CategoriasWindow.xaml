@@ -28,7 +28,8 @@
 
             <DataGrid Grid.Row="1" ItemsSource="{Binding Categorias}" SelectedItem="{Binding CategoriaSelecionada}"
                       AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
-                      CanUserAddRows="False" GridLinesVisibility="Horizontal">
+                      CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="Horizontal"
+                      PreviewKeyDown="DataGrid_PreviewKeyDown">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" Width="*"/>
                     <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" Width="120"/>
