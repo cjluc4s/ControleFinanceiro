@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ControleFinanceiro.App/ControleFinanceiro.App.csproj" />
+    <Project Path="src/ControleFinanceiro.Data/ControleFinanceiro.Data.csproj" />
+  </Folder>
+</Solution>
